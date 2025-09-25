@@ -1,0 +1,95 @@
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+/* base */
+:root {
+    --bg: #fefefe;
+    --text: #2c2c2c;
+    --heading: #7a5132; /* warm brown */
+    --accent: #74A662;  /* sage ribbon */
+    --accent-20: hsla(104, 28%, 52%, 0.20);  /* sage ribbon */
+    --gray: #818181;
+    --maxw: 800px;
+    --gutter: 24px;
+}
+
+* { box-sizing: border-box; }
+a {
+    text-decoration: none;
+}
+html, body { height: 100%; }
+body {
+    margin: 0;
+    font-family: Pretendard, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* header */
+.header {
+    max-width: var(--maxw);
+    margin: 60px auto;
+    padding: 0 var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.profile { display: flex; align-items: center; gap: 15px; }
+.profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profile-name { margin: 0; font-weight: 500;}
+
+.nav-bar a {
+    color: var(--gray);
+    text-decoration: none;
+    margin-left: 24px;
+}
+
+/* main */
+.aboutme {
+    max-width: var(--maxw);
+    padding: 0 var(--gutter);
+    margin: 60px auto; /* leave room for fixed footer */
+}
+
+/* odd/even alignment */
+.aboutme-content .section:nth-child(odd) {
+    text-align: left;
+}
+.aboutme-content .section:nth-child(even) {
+    text-align: right;
+}
+.aboutme-content .section:nth-child(even) ul {
+    list-style-position: inside;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--heading);
+    margin: 10px 0;
+}
+.aboutme-content ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+/* footer */
+.footer {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    background: var(--accent-20);
+}
+.footer p {
+    margin: 0;
+    text-align: center;
+    padding: 15px 0;
+    color: var(--gray);
+}
