@@ -13,7 +13,7 @@
     --dark-gray: #4a4a4a;
     --light-gray: #e6e6e6;
     --medium-gray: #d1d1d1;
-    --maxw: 800px;
+    --maxw: 850px;
     --gutter: 24px;
 }
 
@@ -39,6 +39,12 @@ user-select: none;
 a {
     text-decoration: none;
 }
+a:link {
+color: inherit
+}
+a:visited {
+color: inherit
+}
 ::selection {
     background: none;
     color: var(--accent);
@@ -47,7 +53,7 @@ a {
 body {
     font-family: Pretendard, sans-serif;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
@@ -141,7 +147,7 @@ body {
 }
 
 .card {
-    background: #fff;
+    background: #ffffff;
     border: 0.5px solid hsla(0, 0%, 0%, 0.15);
     border-radius: 10px;
     width: 700px;
@@ -184,11 +190,11 @@ body {
 
 .tag-name {
     padding: 4px 10px;
-    background: var(--bg);
+    background: #ffffff;
     border: 1px solid var(--light-gray);
     border-radius: 12px;
     color: var(--dark-gray);
-    font-size: 13px;
+    font-size: 14px;
     cursor: pointer;
     transition: 0.2s ease;
 }
@@ -226,7 +232,7 @@ body {
     padding: 4px;
     margin: 4px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .page-btn.active {
@@ -250,7 +256,8 @@ body {
 
 .post-row > td {
     padding: 6px 4px;
-    font-size: 13px;
+    font-size: 14px;
+    height: 35px;
 }
 
 .post-date {
@@ -288,6 +295,7 @@ body {
 }
 
 .post-content {
+    padding: 20px;
     line-height: 1.8;
     color: var(--text);
 }
@@ -300,7 +308,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     border-top: 1px solid var(--medium-gray);
-    font-size: 13px;
+    font-size: 14px;
     margin: 60px 0px;
 }
 

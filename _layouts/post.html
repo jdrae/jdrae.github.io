@@ -2,6 +2,42 @@
 layout: default
 ---
 
+<!-- categories -->
+<div class="category">
+    <span class="tag-name" data-category="All">
+        All<span class="tag-cnt">{{ site.posts | size }}</span>
+    </span>
+    {% assign categories = site.categories | sort %}
+    {% for pair in categories %}
+        {% assign category_name = pair[0] %}
+        {% assign posts_in_category = pair[1] %}
+        <span class="tag-name" data-category="{{ category_name }}">
+            {{ category_name }}<span class="tag-cnt">{{ posts_in_category | size }}</span>
+        </span>
+    {% endfor %}
+</div>
+
+<!-- posts list -->
+<div class="posts-section">
+    <div class="posts-header">
+        <p class="posts-title">
+            <span class="posts-category">All</span>
+            <span class="posts-cnt">0</span> posts
+        </p>
+        <div class="pagination">
+            <span class="page-btn disabled">&lt;</span>
+            <span class="page-btn active">1</span>
+            <span class="page-btn disabled">&gt;</span>
+        </div>
+    </div>
+
+    <table class="posts-table">
+        <tbody id="posts-container">
+            <!-- Posts will be dynamically loaded here -->
+        </tbody>
+    </table>
+</div>
+
 <div class="main-post">
     <h1 class="post-main-title">{{ page.title }}</h1>
     <div class="post-meta">
@@ -21,16 +57,15 @@ layout: default
 <!-- post navigation -->
 <table class="post-navigation">
     <tbody>
-        {% if page.previous %}
+        {% if page.next %}
         <tr class="nav-row">
             <td class="nav-direction">⏶ next</td>
             <td class="nav-title">
-                <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }}</a>
+                <a href="{{ page.next.url | relative_url }}">{{ page.next.title }}</a>
             </td>
-            <td class="nav-date">{{ page.previous.date | date: "%Y. %m. %d" }}</td>
+            <td class="nav-date">{{ page.next.date | date: "%Y. %m. %d" }}</td>
         </tr>
         {% endif %}
-        
         <tr class="nav-row current">
             <td class="nav-direction"></td>
             <td class="nav-title current">
@@ -39,15 +74,16 @@ layout: default
             <td class="nav-date">{{ page.date | date: "%Y. %m. %d" }}</td>
         </tr>
         
-        {% if page.next %}
+        {% if page.previous %}
         <tr class="nav-row">
             <td class="nav-direction">⏷ previous</td>
             <td class="nav-title">
-                <a href="{{ page.next.url | relative_url }}">{{ page.next.title }}</a>
+                <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }}</a>
             </td>
-            <td class="nav-date">{{ page.next.date | date: "%Y. %m. %d" }}</td>
+            <td class="nav-date">{{ page.previous.date | date: "%Y. %m. %d" }}</td>
         </tr>
         {% endif %}
+        
     </tbody>
 </table>
 
@@ -55,3 +91,19 @@ layout: default
 <div class="top-link">
     <a href="#" class="top-btn">⏶ TOP</a>
 </div>
+
+
+<!-- Posts data -->
+<script>
+// All posts data - this would normally come from Jekyll
+const allPosts = [
+    {% for post in site.posts %}
+    {
+        title: "{{ post.title | escape }}",
+        url: "{{ post.url | relative_url }}",
+        date: "{{ post.date | date: '%Y. %m. %d' }}",
+        categories: [{% if post.categories %}{% for category in post.categories %}"{{ category }}"{% unless forloop.last %},{% endunless %}{% endfor %}{% endif %}]
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+];
+</script>

@@ -33,6 +33,11 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-paginate
+
+# Pagination
+paginate: 5
+paginate_path: "/page:num/"
 
 # Exclude from processing
 exclude:
