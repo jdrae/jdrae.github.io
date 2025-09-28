@@ -1,0 +1,105 @@
+---
+layout: default
+title: Articles
+---
+
+<!-- categories -->
+<div class="category">
+    {% assign categories = site.posts | map: 'categories' | uniq | sort %}
+    {% for category in categories %}
+        {% assign count = site.posts | where: 'categories', category | size %}
+        <span class="tag-name{% if category == 'Spark' %} active{% endif %}">
+            {{ category }}<span class="tag-cnt">{{ count }}</span>
+        </span>
+    {% endfor %}
+</div>
+
+<!-- posts list -->
+<div class="posts-section">
+    <div class="posts-header">
+        <p class="posts-title">
+            <span class="posts-category">Spark</span> 
+            <span class="posts-cnt">{{ site.posts | where: 'categories', 'Spark' | size }}</span> posts
+        </p>
+        <div class="pagination">
+            <span class="page-btn">&lt;</span>
+            <span class="page-btn">1</span>
+            <span class="page-btn active">2</span>
+            <span class="page-btn">3</span>
+            <span class="page-btn">&gt;</span>
+        </div>
+    </div>
+
+    <table class="posts-table">
+        <tbody>
+            {% for post in site.posts limit:5 %}
+            <tr class="post-row">
+                <td class="post-title">
+                    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                </td>
+                <td class="post-date">{{ post.date | date: "%Y. %m. %d" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- main post content -->
+{% assign latest_post = site.posts.first %}
+{% if latest_post %}
+<div class="main-post">
+    <h1 class="post-main-title">{{ latest_post.title }}</h1>
+    <div class="post-meta">
+        <span class="post-author">jdrae</span>
+        <span class="post-date-main">{{ latest_post.date | date: "%Y. %m. %d" }}</span>
+        <span class="post-tags">
+            {% for tag in latest_post.tags %}
+                #{{ tag }}{% unless forloop.last %} {% endunless %}
+            {% endfor %}
+        </span>
+    </div>
+    <div class="post-content selectable">
+        {{ latest_post.excerpt | default: latest_post.content | truncate: 200 }}
+    </div>
+</div>
+{% endif %}
+
+<!-- post navigation -->
+<table class="post-navigation">
+    <tbody>
+        {% if site.posts.size > 1 %}
+        <tr class="nav-row">
+            <td class="nav-direction">⏶ next</td>
+            <td class="nav-title">
+                <a href="{{ site.posts[1].url | relative_url }}">{{ site.posts[1].title }}</a>
+            </td>
+            <td class="nav-date">{{ site.posts[1].date | date: "%Y. %m. %d" }}</td>
+        </tr>
+        {% endif %}
+        
+        {% if latest_post %}
+        <tr class="nav-row current">
+            <td class="nav-direction"></td>
+            <td class="nav-title current">
+                <a href="{{ latest_post.url | relative_url }}">{{ latest_post.title }}</a>
+            </td>
+            <td class="nav-date">{{ latest_post.date | date: "%Y. %m. %d" }}</td>
+        </tr>
+        {% endif %}
+        
+        {% if site.posts.size > 2 %}
+        <tr class="nav-row">
+            <td class="nav-direction">⏷ previous</td>
+            <td class="nav-title">
+                <a href="{{ site.posts[2].url | relative_url }}">{{ site.posts[2].title }}</a>
+            </td>
+            <td class="nav-date">{{ site.posts[2].date | date: "%Y. %m. %d" }}</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+<!-- top link -->
+<div class="top-link">
+    <a href="#" class="top-btn">⏶ TOP</a>
+</div>

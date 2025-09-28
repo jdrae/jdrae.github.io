@@ -1,0 +1,57 @@
+---
+layout: default
+---
+
+<div class="main-post">
+    <h1 class="post-main-title">{{ page.title }}</h1>
+    <div class="post-meta">
+        <span class="post-author">jdrae</span>
+        <span class="post-date-main">{{ page.date | date: "%Y. %m. %d" }}</span>
+        <span class="post-tags">
+            {% for tag in page.tags %}
+                #{{ tag }}{% unless forloop.last %} {% endunless %}
+            {% endfor %}
+        </span>
+    </div>
+    <div class="post-content selectable">
+        {{ content }}
+    </div>
+</div>
+
+<!-- post navigation -->
+<table class="post-navigation">
+    <tbody>
+        {% if page.previous %}
+        <tr class="nav-row">
+            <td class="nav-direction">⏶ next</td>
+            <td class="nav-title">
+                <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }}</a>
+            </td>
+            <td class="nav-date">{{ page.previous.date | date: "%Y. %m. %d" }}</td>
+        </tr>
+        {% endif %}
+        
+        <tr class="nav-row current">
+            <td class="nav-direction"></td>
+            <td class="nav-title current">
+                <a href="{{ page.url | relative_url }}">{{ page.title }}</a>
+            </td>
+            <td class="nav-date">{{ page.date | date: "%Y. %m. %d" }}</td>
+        </tr>
+        
+        {% if page.next %}
+        <tr class="nav-row">
+            <td class="nav-direction">⏷ previous</td>
+            <td class="nav-title">
+                <a href="{{ page.next.url | relative_url }}">{{ page.next.title }}</a>
+            </td>
+            <td class="nav-date">{{ page.next.date | date: "%Y. %m. %d" }}</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+<!-- top link -->
+<div class="top-link">
+    <a href="#" class="top-btn">⏶ TOP</a>
+</div>
