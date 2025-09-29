@@ -37,6 +37,7 @@ user-select: none;
 }
 
 a {
+    color: var(--brown);
     text-decoration: none;
 }
 a:link {
@@ -298,6 +299,14 @@ body {
     padding: 20px;
     line-height: 1.8;
     color: var(--text);
+}
+.post-content a{
+    color: var(--brown);
+}
+.post-content a:hover{
+    background-color: var(--brown);
+    color:#ffffff;
+    transition: 0.1s ease;
 }
 
 .post-content p {
