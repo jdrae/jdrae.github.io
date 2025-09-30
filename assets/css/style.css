@@ -3,7 +3,7 @@
 
 /* base */
 :root {
-    --bg: #fefefe;
+    --bg: #ffffff;
     --text: #2c2c2c;
     --text-50: hsla(0, 0%, 17%, 0.50);
     --brown: #7a5132;
@@ -303,6 +303,7 @@ body {
 
 .post-content {
     padding: 5px;
+    font-size: 16px;
     color: var(--text);
 }
 .post-content a{
