@@ -6,9 +6,9 @@
     --bg: #ffffff;
     --text: #2c2c2c;
     --text-50: hsla(0, 0%, 17%, 0.50);
-    --brown: #7a5132;
-    --accent: #74A662;
-    --accent-20: #E2ECDF;
+    --secondary: #573318;
+    --accent: #178a3d;
+    --accent-20: rgba(23, 138, 61, 0.25);
     --gray: #818181;
     --dark-gray: #4a4a4a;
     --light-gray: #e6e6e6;
@@ -37,7 +37,7 @@ user-select: none;
 }
 
 a {
-    color: var(--brown);
+    color: var(--secondary);
     text-decoration: none;
 }
 a:link {
@@ -126,7 +126,7 @@ body {
 .section-title {
     font-size: 20px;
     font-weight: 500;
-    color: var(--brown);
+    color: var(--secondary);
     margin: 10px 0;
 }
 .aboutme-content ul {
@@ -276,7 +276,7 @@ body {
 }
 
 .post-main-title {
-    color: var(--brown);
+    color: var(--secondary);
     margin-bottom: 10px;
 }
 
@@ -307,10 +307,10 @@ body {
     color: var(--text);
 }
 .post-content a{
-    color: var(--brown);
+    color: var(--secondary);
 }
 .post-content a:hover{
-    background-color: var(--brown);
+    background-color: var(--secondary);
     color:#ffffff;
     transition: 0.1s ease;
 }

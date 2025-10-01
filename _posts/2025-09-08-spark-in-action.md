@@ -1,5 +1,5 @@
 ---
-title: "스파크를 다루는 기술: Spark in Action"
+title: "스파크를 다루는 기술 책 정리"
 date: 2025-09-08
 categories: [Data engineering, Spark]
 tags: [data engineering, spark, book review]
