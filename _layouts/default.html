@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% assign page_lang = page.lang | default: site.default_lang | default: "en" %}
+<html lang="{{ page_lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <link rel="icon" type="image/png" href="{{ '/assets/images/icon-from-plastic-donut-64.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/images/icon-from-plastic-donut-64.png' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
+  {% feed_meta %}
+  {% seo title=false %}
+</head>
+<body>
+  {% assign t = site.data.i18n[page_lang] %}
+  {% if page_lang == "ko" %}{% assign home_url = "/ko/" %}{% else %}{% assign home_url = "/" %}{% endif %}
+  <div class="frame">
+    <header class="site-header">
+      <a class="site-title" href="{{ home_url | relative_url }}">{{ site.title }}</a>
+      {% include lang-toggle.html %}
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        {% include profile.html %}
+        {% include categories.html %}
+      </aside>
+
+      <div class="content">
+        <main class="main">
+          {{ content }}
+        </main>
+        {% if page.layout == "post" %}
+          {% include recent-posts.html %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ site.author.name }}. Built with <a href="https://jekyllrb.com">Jekyll</a>.</p>
+    </div>
+  </footer>
+
+  <script src="{{ '/assets/js/pagination.js' | relative_url }}" defer></script>
+</body>
+</html>

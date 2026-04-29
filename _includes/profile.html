@@ -1,0 +1,30 @@
+{% assign profile_lang = page.lang | default: "en" %}
+{% assign profile_t = site.data.i18n[profile_lang] %}
+<section class="sidebar__section sidebar__profile">
+  {% if site.author.avatar %}
+    <img class="sidebar__avatar" src="{{ site.author.avatar | relative_url }}" alt="{{ site.author.name }}">
+  {% else %}
+    <div class="sidebar__avatar sidebar__avatar--placeholder" aria-hidden="true">
+      {{ site.author.name | slice: 0 | upcase }}
+    </div>
+  {% endif %}
+  <h2 class="sidebar__name">{{ site.author.name }}</h2>
+  {% assign bio = profile_t.bio | default: site.author.bio %}
+  {% if bio %}
+    <p class="sidebar__bio">{{ bio }}</p>
+  {% endif %}
+  <ul class="sidebar__links">
+    {% if site.author.email %}
+      <li>{% include icon-link.html %}<a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></li>
+    {% endif %}
+    {% if site.author.github %}
+      <li>{% include icon-link.html %}<a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener">github.com/{{ site.author.github }}</a></li>
+    {% endif %}
+    {% if site.author.twitter %}
+      <li>{% include icon-link.html %}<a href="https://twitter.com/{{ site.author.twitter }}" target="_blank" rel="noopener">twitter.com/{{ site.author.twitter }}</a></li>
+    {% endif %}
+    {% if site.author.linkedin %}
+      <li>{% include icon-link.html %}<a href="https://linkedin.com/in/{{ site.author.linkedin }}" target="_blank" rel="noopener">linkedin.com/in/{{ site.author.linkedin }}</a></li>
+    {% endif %}
+  </ul>
+</section>

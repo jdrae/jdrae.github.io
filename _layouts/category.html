@@ -1,0 +1,48 @@
+---
+layout: default
+---
+
+{% assign current_lang = page.lang | default: "en" %}
+{% assign t = site.data.i18n[current_lang] %}
+{% if current_lang == "ko" %}{% assign home_url = "/ko/" %}{% else %}{% assign home_url = "/" %}{% endif %}
+
+{% assign cat_slug = page.title | downcase | replace: " ", "-" %}
+{% assign cat_label = t.category_labels[cat_slug] | default: page.title %}
+
+{% assign post_count = page.posts.size %}
+{% if post_count == 1 %}
+  {% assign count_label = t.posts_count_one %}
+{% else %}
+  {% assign count_label = t.posts_count_other | replace: "%{count}", post_count %}
+{% endif %}
+
+<section class="post-list" data-paginate="5">
+  <h1 class="section-title">{{ t.categories }} <span class="category-name">#{{ cat_label }}</span></h1>
+
+  <p class="category-meta">
+    {{ count_label }}
+    · <a href="{{ home_url | relative_url }}">{{ t.back_to_all }}</a>
+  </p>
+
+  {% for post in page.posts %}
+    <article class="post-list__item" data-paginate-item>
+      <header>
+        <time datetime="{{ post.date | date_to_xmlschema }}">
+          {{ post.date | date: "%b %-d, %Y" }}
+        </time>
+        <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        {% if post.tags.size > 0 %}
+          <span class="post-list__tags">
+            {% for tag in post.tags %}
+              <span>#{{ tag }}</span>
+            {% endfor %}
+          </span>
+        {% endif %}
+      </header>
+      <div class="post-list__excerpt">
+        {{ post.content | strip_html | normalize_whitespace | truncate: 150 }}
+      </div>
+      <a class="post-list__read-more" href="{{ post.url | relative_url }}">{{ t.read_more }}</a>
+    </article>
+  {% endfor %}
+</section>

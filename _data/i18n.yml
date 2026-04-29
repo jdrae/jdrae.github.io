@@ -1,0 +1,40 @@
+en:
+  site_lang_label: English
+  other_lang_label: 한국어
+  all_posts: All posts
+  categories: Categories
+  tags: Tags
+  recent_posts: Recent posts
+  no_posts: No posts yet.
+  no_categories: No categories yet.
+  read_more: "read more →"
+  back_to_all: "← all posts"
+  posts_count_one: "1 post"
+  posts_count_other: "%{count} posts"
+  prev: Prev
+  next: Next
+  page_of: "Page %{current} of %{total}"
+  bio: "notes on code, life, and everything in between"
+  category_labels: {}
+
+ko:
+  site_lang_label: 한국어
+  other_lang_label: English
+  all_posts: 전체 글
+  categories: 카테고리
+  tags: 태그
+  recent_posts: 최근 글
+  no_posts: 아직 작성된 글이 없습니다.
+  no_categories: 카테고리가 없습니다.
+  read_more: "더 읽기 →"
+  back_to_all: "← 전체 글"
+  posts_count_one: "글 1개"
+  posts_count_other: "글 %{count}개"
+  prev: 이전
+  next: 다음
+  page_of: "%{total}페이지 중 %{current}페이지"
+  bio: "notes on code, life, and everything in between"
+  category_labels:
+    meta: 메타
+    code: 코드
+    design: 디자인

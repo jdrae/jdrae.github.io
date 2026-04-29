@@ -1,0 +1,41 @@
+---
+layout: default
+---
+
+{% assign current_lang = page.lang | default: "en" %}
+{% assign t = site.data.i18n[current_lang] %}
+{% if current_lang == "ko" %}{% assign cat_prefix = "/ko/categories/" %}{% else %}{% assign cat_prefix = "/categories/" %}{% endif %}
+
+<article class="post">
+  <header class="post__header">
+    <h1 class="post__title">{{ page.title }}</h1>
+    <div class="post__meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">
+        {{ page.date | date: "%B %-d, %Y" }}
+      </time>
+      {% if page.categories.size > 0 %}
+        <span class="post__categories">
+          {% for category in page.categories %}
+            {% assign cat_slug = category | downcase | replace: " ", "-" %}
+            {% assign cat_label = t.category_labels[cat_slug] | default: category %}
+            <a href="{{ cat_prefix | append: cat_slug | append: '/' | relative_url }}">#{{ cat_label }}</a>
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="post__body">
+    {{ content }}
+  </div>
+
+  {% if page.tags.size > 0 %}
+    <footer class="post__footer">
+      <div class="post__tags">
+        {% for tag in page.tags %}
+          <span>#{{ tag }}</span>
+        {% endfor %}
+      </div>
+    </footer>
+  {% endif %}
+</article>

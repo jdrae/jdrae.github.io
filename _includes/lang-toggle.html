@@ -1,0 +1,82 @@
+{% comment %}
+  Resolves the link target for the inactive language button.
+
+  Order of resolution:
+    1. Post: look up sibling in the other collection by translation_key.
+    2. Category page: look for the same category slug in the other
+       collection — only link there if at least one post uses it.
+    3. Static page (home, categories index): prefix-swap between / and /ko/.
+
+  If none resolve, link to the other language's 404 page, which explains
+  that no translation exists.
+
+  Layout note: buttons always render in fixed EN→KO order. Only the
+  is-active class moves between them on language change — positions stay
+  stable so the header doesn't visually shift.
+{% endcomment %}
+
+{% assign current_lang = page.lang | default: site.default_lang | default: "en" %}
+{% if current_lang == "en" %}
+  {% assign other_lang = "ko" %}
+  {% assign other_404 = "/ko/404.html" %}
+{% else %}
+  {% assign other_lang = "en" %}
+  {% assign other_404 = "/404.html" %}
+{% endif %}
+
+{% assign other_url = nil %}
+
+{% if page.layout == "post" %}
+  {% if page.translation_key %}
+    {% if other_lang == "ko" %}{% assign siblings = site.ko_posts %}{% else %}{% assign siblings = site.posts %}{% endif %}
+    {% for sibling in siblings %}
+      {% if sibling.translation_key == page.translation_key %}
+        {% assign other_url = sibling.url %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% elsif page.layout == "category" %}
+  {% assign cat_slug = page.title | downcase | replace: " ", "-" %}
+  {% if other_lang == "ko" %}{% assign siblings = site.ko_posts %}{% else %}{% assign siblings = site.posts %}{% endif %}
+  {% for sibling in siblings %}
+    {% for c in sibling.categories %}
+      {% assign c_slug = c | downcase | replace: " ", "-" %}
+      {% if c_slug == cat_slug %}
+        {% if other_lang == "ko" %}
+          {% assign other_url = "/ko/categories/" | append: cat_slug | append: "/" %}
+        {% else %}
+          {% assign other_url = "/categories/" | append: cat_slug | append: "/" %}
+        {% endif %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+    {% if other_url %}{% break %}{% endif %}
+  {% endfor %}
+{% else %}
+  {% if current_lang == "en" %}
+    {% if page.url == "/" %}
+      {% assign other_url = "/ko/" %}
+    {% else %}
+      {% assign other_url = "/ko" | append: page.url %}
+    {% endif %}
+  {% else %}
+    {% if page.url == "/ko/" %}
+      {% assign other_url = "/" %}
+    {% else %}
+      {% assign other_url = page.url | replace_first: "/ko", "" %}
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+{% unless other_url %}{% assign other_url = other_404 %}{% endunless %}
+
+<div class="lang-toggle" role="group" aria-label="Language">
+  {% if current_lang == "en" %}
+    <span class="lang-toggle__btn is-active" aria-current="page" data-lang="en">EN</span>
+    <a class="lang-toggle__btn" href="{{ other_url | relative_url }}" hreflang="ko" data-lang="ko">KO</a>
+  {% else %}
+    <a class="lang-toggle__btn" href="{{ other_url | relative_url }}" hreflang="en" data-lang="en">EN</a>
+    <span class="lang-toggle__btn is-active" aria-current="page" data-lang="ko">KO</span>
+  {% endif %}
+</div>

@@ -1,0 +1,41 @@
+---
+layout: default
+---
+
+{% assign current_lang = page.lang | default: "en" %}
+{% assign t = site.data.i18n[current_lang] %}
+{% if current_lang == "ko" %}
+  {% assign posts = site.ko_posts | sort: "date" | reverse %}
+{% else %}
+  {% assign posts = site.posts %}
+{% endif %}
+
+<section class="post-list" data-paginate="5">
+  <h1 class="section-title">{{ t.all_posts }}</h1>
+
+  {% if posts.size > 0 %}
+    {% for post in posts %}
+      <article class="post-list__item" data-paginate-item>
+        <header>
+          <time datetime="{{ post.date | date_to_xmlschema }}">
+            {{ post.date | date: "%b %-d, %Y" }}
+          </time>
+          <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+          {% if post.tags.size > 0 %}
+            <span class="post-list__tags">
+              {% for tag in post.tags %}
+                <span>#{{ tag }}</span>
+              {% endfor %}
+            </span>
+          {% endif %}
+        </header>
+        <div class="post-list__excerpt">
+          {{ post.content | strip_html | normalize_whitespace | truncate: 150 }}
+        </div>
+        <a class="post-list__read-more" href="{{ post.url | relative_url }}">{{ t.read_more }}</a>
+      </article>
+    {% endfor %}
+  {% else %}
+    <p class="post-list__empty">{{ t.no_posts }}</p>
+  {% endif %}
+</section>

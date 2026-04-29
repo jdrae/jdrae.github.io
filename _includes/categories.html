@@ -1,0 +1,41 @@
+{% assign current_lang = page.lang | default: "en" %}
+{% assign t = site.data.i18n[current_lang] %}
+{% if current_lang == "ko" %}
+  {% assign cat_prefix = "/ko/categories/" %}
+  {% assign source_posts = site.ko_posts %}
+{% else %}
+  {% assign cat_prefix = "/categories/" %}
+  {% assign source_posts = site.posts %}
+{% endif %}
+
+{% assign cat_map = "" | split: "" %}
+{% for post in source_posts %}
+  {% for c in post.categories %}
+    {% assign cat_map = cat_map | push: c %}
+  {% endfor %}
+{% endfor %}
+{% assign cats = cat_map | uniq | sort %}
+
+<section class="sidebar__section sidebar__categories">
+  <h3 class="sidebar__heading">{{ t.categories }}</h3>
+  {% if cats.size > 0 %}
+    <ul class="sidebar__category-list">
+      {% for category in cats %}
+        {% assign slug = category | downcase | replace: " ", "-" %}
+        {% assign label = t.category_labels[slug] | default: category %}
+        {% assign count = 0 %}
+        {% for p in source_posts %}
+          {% if p.categories contains category %}{% assign count = count | plus: 1 %}{% endif %}
+        {% endfor %}
+        <li>
+          <a href="{{ cat_prefix | append: slug | append: '/' | relative_url }}">
+            <span>{{ label }}</span>
+            <span class="sidebar__category-count">{{ count }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="sidebar__empty">{{ t.no_categories }}</p>
+  {% endif %}
+</section>

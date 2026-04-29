@@ -1,0 +1,35 @@
+{% assign current_lang = page.lang | default: "en" %}
+{% assign t = site.data.i18n[current_lang] %}
+{% if current_lang == "ko" %}
+  {% assign recent = site.ko_posts | sort: "date" | reverse %}
+{% else %}
+  {% assign recent = site.posts %}
+{% endif %}
+
+<section class="recent-posts" data-paginate="5">
+  <h3 class="recent-posts__heading">{{ t.recent_posts }}</h3>
+  {% if recent.size > 0 %}
+    <ol class="recent-posts__list">
+      {% for post in recent %}
+        {% assign is_current = false %}
+        {% if page.url == post.url %}{% assign is_current = true %}{% endif %}
+        {% assign cat = post.categories | first %}
+        {% if cat %}
+          {% assign cat_slug = cat | downcase | replace: " ", "-" %}
+          {% assign cat_label = t.category_labels[cat_slug] | default: cat %}
+        {% endif %}
+        <li class="recent-posts__item{% if is_current %} recent-posts__item--current{% endif %}" data-paginate-item{% if is_current %} data-paginate-current{% endif %}>
+          <a href="{{ post.url | relative_url }}"{% if is_current %} aria-current="page"{% endif %}>
+            <span class="recent-posts__lead">
+              {% if cat %}<span class="recent-posts__category">{{ cat_label }}</span>{% endif %}
+              <span class="recent-posts__title">{{ post.title }}</span>
+            </span>
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d" }}</time>
+          </a>
+        </li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    <p class="recent-posts__empty">{{ t.no_posts }}</p>
+  {% endif %}
+</section>

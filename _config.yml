@@ -1,0 +1,73 @@
+title: jdrae.github.io
+tagline: notes on code, life, and everything in between
+description: A personal blog built with Jekyll and hosted on GitHub Pages.
+author:
+  name: jdrae
+  bio: notes on code, life, and everything in between
+  avatar: /assets/images/avatar.jpeg
+  email: draejang@gmail.com
+  github: jdrae
+  # twitter: yourhandle
+  # linkedin: yourhandle
+
+url: ""
+baseurl: ""
+
+permalink: /:year/:month/:day/:title/
+
+languages: [en, ko]
+default_lang: en
+
+collections:
+  ko_posts:
+    output: true
+    permalink: /ko/:year/:month/:day/:title/
+
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-archives
+
+jekyll-archives:
+  enabled:
+    - categories
+  layouts:
+    category: category
+  permalinks:
+    category: /categories/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      lang: en
+  - scope:
+      path: ""
+      type: ko_posts
+    values:
+      layout: post
+      lang: ko
+  - scope:
+      path: ""
+      type: pages
+    values:
+      lang: en
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
+  - README.md
+  - .dev
+  - CLAUDE.md
