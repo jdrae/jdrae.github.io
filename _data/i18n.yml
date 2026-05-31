@@ -15,7 +15,9 @@ en:
   next: Next
   page_of: "Page %{current} of %{total}"
   bio: "notes on code, life, and everything in between"
-  category_labels: {}
+  category_labels:
+    agentic-coding: Agentic Coding
+    events: Events
 
 ko:
   site_lang_label: 한국어
@@ -38,3 +40,5 @@ ko:
     meta: 메타
     code: 코드
     design: 디자인
+    agentic-coding: 에이전틱 코딩
+    events: 행사
