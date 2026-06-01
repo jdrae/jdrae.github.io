@@ -7,23 +7,41 @@ permalink: /categories/
 <h1 class="section-title">Categories</h1>
 
 {% assign t = site.data.i18n.en %}
-{% assign categories = site.categories | sort %}
+{% assign discovered_cats = "" | split: "" %}
+{% for category in site.categories %}
+  {% assign discovered_cats = discovered_cats | push: category[0] %}
+{% endfor %}
+{% assign discovered_cats = discovered_cats | sort %}
+{% assign categories = "" | split: "" %}
+{% for ordered_slug in site.data.category_order %}
+  {% if discovered_cats contains ordered_slug %}
+    {% assign categories = categories | push: ordered_slug %}
+  {% endif %}
+{% endfor %}
+{% for category in discovered_cats %}
+  {% assign slug = category | downcase | replace: ' ', '-' %}
+  {% unless site.data.category_order contains slug %}
+    {% assign categories = categories | push: category %}
+  {% endunless %}
+{% endfor %}
 
 {% if categories.size > 0 %}
   <p>
     {% for category in categories %}
-      {% assign slug = category[0] | downcase | replace: ' ', '-' %}
-      {% assign label = t.category_labels[slug] | default: category[0] %}
-      <a href="#{{ slug }}">{{ label }} ({{ category[1].size }})</a>{% unless forloop.last %} · {% endunless %}
+      {% assign slug = category | downcase | replace: ' ', '-' %}
+      {% assign label = t.category_labels[slug] | default: category %}
+      {% assign cat_posts = site.categories[category] %}
+      <a href="#{{ slug }}">{{ label }} ({{ cat_posts.size }})</a>{% unless forloop.last %} · {% endunless %}
     {% endfor %}
   </p>
 
   {% for category in categories %}
-    {% assign slug = category[0] | downcase | replace: ' ', '-' %}
-    {% assign label = t.category_labels[slug] | default: category[0] %}
+    {% assign slug = category | downcase | replace: ' ', '-' %}
+    {% assign label = t.category_labels[slug] | default: category %}
+    {% assign cat_posts = site.categories[category] %}
     <h2 class="archive__year" id="{{ slug }}">{{ label }}</h2>
     <ul class="archive__list">
-      {% for post in category[1] %}
+      {% for post in cat_posts %}
         <li>
           <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
           <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>

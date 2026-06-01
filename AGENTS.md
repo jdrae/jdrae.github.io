@@ -222,9 +222,15 @@ Default workflow:
 5. Add or update the matching English post in `_posts/YYYY-MM-DD-slug.md`.
    Keep the same content structure, headings, code blocks, links, images, and
    `translation_key`; translate naturally rather than literally.
-6. Add missing `category_labels` in `_data/i18n.yml` for both `en` and `ko`
+6. Verify each post has exactly one category before publishing. If either the
+   Korean or English post has zero categories or more than one category, stop
+   and ask the user which single category to use.
+7. Add missing `category_labels` in `_data/i18n.yml` for both `en` and `ko`
    whenever a new category slug is introduced.
-7. Run `bundle exec jekyll build` and verify the generated EN/KO URLs and
+8. If a new category slug is introduced, ask the user where it should be
+   inserted in `_data/category_order.yml` before updating the order. Do not
+   guess the category order.
+9. Run `bundle exec jekyll build` and verify the generated EN/KO URLs and
    language toggle targets.
 
 When a proper noun needs translation or canonicalization, ask the user first.

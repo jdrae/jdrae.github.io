@@ -14,7 +14,19 @@
     {% assign cat_map = cat_map | push: c %}
   {% endfor %}
 {% endfor %}
-{% assign cats = cat_map | uniq | sort %}
+{% assign discovered_cats = cat_map | uniq | sort %}
+{% assign cats = "" | split: "" %}
+{% for ordered_slug in site.data.category_order %}
+  {% if discovered_cats contains ordered_slug %}
+    {% assign cats = cats | push: ordered_slug %}
+  {% endif %}
+{% endfor %}
+{% for category in discovered_cats %}
+  {% assign slug = category | downcase | replace: " ", "-" %}
+  {% unless site.data.category_order contains slug %}
+    {% assign cats = cats | push: category %}
+  {% endunless %}
+{% endfor %}
 
 <section class="sidebar__section sidebar__categories">
   <h3 class="sidebar__heading">{{ t.categories }}</h3>
