@@ -204,6 +204,34 @@ so you don't need to keep the excerpt copy in sync with the body.
 For a Korean version, mirror the file at `_ko_posts/YYYY-MM-DD-slug.md` with
 the same `translation_key:` (date and slug can diverge if you want).
 
+### User's usual post workflow
+The user usually drafts new posts in Korean and asks the assistant to publish
+them to the blog. Treat Korean as the source of truth unless the user says
+otherwise.
+
+Default workflow:
+
+1. Add or update the Korean post in `_ko_posts/YYYY-MM-DD-slug.md`.
+2. Convert Obsidian-style embeds such as `![[image.png]]` or
+   `![[image.png|400]]` to standard Markdown image syntax.
+3. Copy referenced images into a post-specific folder:
+   `assets/images/posts/YYYY-MM-DD-slug/`.
+4. Use short descriptive image filenames inside that folder. Do not repeat the
+   date prefix in individual image filenames once the images are grouped under
+   the post folder.
+5. Add or update the matching English post in `_posts/YYYY-MM-DD-slug.md`.
+   Keep the same content structure, headings, code blocks, links, images, and
+   `translation_key`; translate naturally rather than literally.
+6. Add missing `category_labels` in `_data/i18n.yml` for both `en` and `ko`
+   whenever a new category slug is introduced.
+7. Run `bundle exec jekyll build` and verify the generated EN/KO URLs and
+   language toggle targets.
+
+When a proper noun needs translation or canonicalization, ask the user first.
+This includes names of people, books, papers, products, events, and
+organizations. Do not guess canonical English titles for Korean proper nouns
+unless the user has already provided the desired wording.
+
 ### Adding a layout/include
 Layouts go in `_layouts/`, includes in `_includes/`. Reference includes via
 `{% include name.html %}`. Layouts inherit via `layout:` front matter.
