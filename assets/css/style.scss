@@ -227,7 +227,7 @@ body { display: flex; flex-direction: column; }
 
 .layout {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 240px minmax(0, 1fr);
   gap: 24px;
   align-items: start;
   flex: 1;
@@ -381,6 +381,8 @@ body { display: flex; flex-direction: column; }
   background: var(--color-canvas-default);
   border-radius: var(--radius);
   padding: 16px;
+  width: 100%;
+  min-width: 0;
 }
 
 .recent-posts__heading {
@@ -402,6 +404,11 @@ body { display: flex; flex-direction: column; }
   display: grid;
   align-content: start;
   gap: 0;
+  min-width: 0;
+}
+
+.recent-posts__item {
+  min-width: 0;
 }
 
 .recent-posts__item a {
@@ -413,6 +420,7 @@ body { display: flex; flex-direction: column; }
   color: var(--color-fg-default);
   font-size: 0.9375rem;
   border-bottom: 1px solid var(--color-border-muted);
+  min-width: 0;
 
   &:hover { color: var(--color-accent-fg); text-decoration: none; }
 }
