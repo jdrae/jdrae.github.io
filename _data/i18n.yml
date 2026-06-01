@@ -17,7 +17,9 @@ en:
   bio: "notes on code, life, and everything in between"
   category_labels:
     agentic-coding: Agentic Coding
+    data-engineering: Data Engineering
     events: Events
+    machine-learning: Machine Learning
 
 ko:
   site_lang_label: 한국어
@@ -41,4 +43,6 @@ ko:
     code: 코드
     design: 디자인
     agentic-coding: 에이전틱 코딩
+    data-engineering: 데이터 엔지니어링
     events: 행사
+    machine-learning: 머신러닝
