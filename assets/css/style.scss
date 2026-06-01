@@ -588,6 +588,27 @@ body { display: flex; flex-direction: column; }
   font-size: 0.8125rem;
 }
 
+.scroll-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.scroll-top__button {
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-accent-fg);
+  background: transparent;
+  border: none;
+  padding: 4px 6px;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 /* Single post */
 .post__header {
   margin-bottom: 24px;

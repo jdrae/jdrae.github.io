@@ -33,6 +33,11 @@
         </main>
         {% if page.layout == "post" %}
           {% include recent-posts.html %}
+          <div class="scroll-top">
+            <button class="scroll-top__button" type="button" data-scroll-top>
+              {{ t.back_to_top }}
+            </button>
+          </div>
         {% endif %}
       </div>
     </div>

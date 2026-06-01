@@ -9,6 +9,7 @@ en:
   no_categories: No categories yet.
   read_more: "read more →"
   back_to_all: "← all posts"
+  back_to_top: "↑ top"
   posts_count_one: "1 post"
   posts_count_other: "%{count} posts"
   prev: Prev
@@ -32,6 +33,7 @@ ko:
   no_categories: 카테고리가 없습니다.
   read_more: "더 읽기 →"
   back_to_all: "← 전체 글"
+  back_to_top: "↑ 맨 위"
   posts_count_one: "글 1개"
   posts_count_other: "글 %{count}개"
   prev: 이전

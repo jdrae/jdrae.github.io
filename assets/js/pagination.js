@@ -81,6 +81,29 @@
   }
 })();
 
+// Post-detail "top" buttons scroll back to the top of the current page.
+(function () {
+  function bootstrap() {
+    var buttons = document.querySelectorAll('[data-scroll-top]');
+    Array.prototype.forEach.call(buttons, function (button) {
+      button.addEventListener('click', function () {
+        var prefersReducedMotion = window.matchMedia &&
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootstrap);
+  } else {
+    bootstrap();
+  }
+})();
+
 // On mobile post pages, scroll past the stacked sidebar to the post title
 // on first navigation so the user lands on the content, not the profile card.
 (function () {
